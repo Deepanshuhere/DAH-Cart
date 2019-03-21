@@ -21,12 +21,6 @@
 </head>
 <body>
 
-<!-- %
-HttpSession httpSession = request.getSession(false);
-if(httpSession == null)
-	request.getRequestDispatcher("/login.jsp").forward(request,response);
-%-->
-
 <div class="container" style="padding-top:70px;">
 
 <div class="card mx-auto" style=" width: 40rem;">
@@ -39,17 +33,17 @@ if(httpSession == null)
 	  	  <div class="input-group-prepend">
     			<label class="input-group-text" for="inputGroupSelect01">Category</label>
 		  </div>
+	  	 
 	  	  <select class="custom-select" id="inputGroupSelect01" name="categoryId">
 	  	  	
 	  	  	<c:forEach items="${categories}" var="category" >
 	 				<option value="${category.id}"> ${category.name} </option>
 			</c:forEach>			
-	  	  	
-		  </select>
+	  	  </select>
+	
 	</div>
 
   	<div class="form-group">
-    	<label for="name">Product Name</label>
     	<input type="text" class="form-control" name="name" placeholder="Enter product name">
   	</div>
   	
@@ -64,14 +58,19 @@ if(httpSession == null)
 		</div>
 	</div>  	
   	
-  	<div class="form-group">
- 	   <label for="productPrice">Product Price</label>
+  	<div class="form-row">
+  	<div class="form-group col-md-6">
  	   <input type="text" class="form-control" name="price" placeholder="Enter Product Price">
-  	</div>
+
+ 	</div>
   	
-  	<div class="form-group">
-  		<label for="comment">Product Description</label>
-  		<textarea class="form-control" name="description" rows="1" id="comment"></textarea>
+ 	<div class="form-group col-md-6">
+ 	   <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity">
+ 	</div>
+  	</div>
+  	  	
+  	<div class="form-group ">
+  		<textarea class="form-control" name="description" rows="1" id="comment" placeholder="Enter Product Description"></textarea>
 	</div>
   	
 	<button type="submit" class="btn btn-primary">Add</button>

@@ -9,13 +9,16 @@ import java.util.List;
 
 import com.cart.connection.ConnectionProvider;
 import com.cart.model.Product;
+import com.cart.model.Sales;
 
 public class ProductDAOImpl implements ProductDAO 
 {
 	private Connection connection;
-	private List<Product> list;
+	private List<Product> products;
+	private List<Sales> sales;
 	private PreparedStatement preparedStatement;
 	private Product product;
+	private Sales sale;
 	private ResultSet resultSet;
 	private String query;
 	private int status;
@@ -26,14 +29,15 @@ public class ProductDAOImpl implements ProductDAO
 		try 
 		{
 			connection		  = ConnectionProvider.getConnection();
-			query			  = "insert into product values(?,?,?,?,?)";
+			query			  = "insert into product values(?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(query);	
-				
-			preparedStatement.setString(1, product.getId());
+			
+			preparedStatement.setInt(1, product.getId());
 			preparedStatement.setString(2, product.getName());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setString(4, product.getDescription());
-			preparedStatement.setString(5, product.getCategoryId());
+			preparedStatement.setInt(5, product.getQuantity());
+			preparedStatement.setInt(6, product.getCategoryId());
 			status = preparedStatement.executeUpdate();
 		} 
 		
@@ -61,7 +65,7 @@ public class ProductDAOImpl implements ProductDAO
 	}
 
 	@Override
-	public int delete(String productId)
+	public int delete(int productId)
 	{
 		try
 		{
@@ -69,7 +73,7 @@ public class ProductDAOImpl implements ProductDAO
 			query			  = "delete from product where id=?";
 			preparedStatement = connection.prepareStatement(query);
 			
-			preparedStatement.setString(1, productId);
+			preparedStatement.setInt(1, productId);
 
 			status =  preparedStatement.executeUpdate();
 		}
@@ -104,13 +108,15 @@ public class ProductDAOImpl implements ProductDAO
 		try
 		{
 			connection		  = ConnectionProvider.getConnection();
-			query 			  = "UPDATE PRODUCT SET NAME = ?, PRICE = ?, DESCRIPTION = ? WHERE ID = ?";
+			query 			  = "UPDATE PRODUCT SET NAME = ?, PRICE = ?, DESCRIPTION = ?, QUANTITY = ? WHERE ID = ?";
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setDouble(2, product.getPrice());
 			preparedStatement.setString(3, product.getDescription());
-			preparedStatement.setString(4, product.getId());
+			preparedStatement.setInt   (4, product.getQuantity());
+			preparedStatement.setInt   (5, product.getId());
+
 			status = preparedStatement.executeUpdate();
 		}
 		
@@ -138,7 +144,7 @@ public class ProductDAOImpl implements ProductDAO
 	}
 
 	@Override
-	public Product getProduct(String id) 
+	public Product getProduct(int id) 
 	{
 		try
 		{
@@ -146,16 +152,17 @@ public class ProductDAOImpl implements ProductDAO
 			query			  = "select * from product where id=?";
 			preparedStatement = connection.prepareStatement(query);
 		
-			preparedStatement.setString(1, id);
+			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next())
 			{
 				product = new Product();
-				product.setId(resultSet.getString(1));
+				product.setId(resultSet.getInt(1));
 				product.setName(resultSet.getString(2));
 				product.setPrice(resultSet.getInt(3));
 				product.setDescription(resultSet.getString(4));
+				product.setQuantity(resultSet.getInt(5));
 			}
 		
 		//alter table product modify ( price number(6);
@@ -191,7 +198,7 @@ public class ProductDAOImpl implements ProductDAO
 		{
 			connection=ConnectionProvider.getConnection();
 		
-			list			  = new ArrayList<>();
+			products		  = new ArrayList<>();
 			query			  = "select * from product";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet		  = preparedStatement.executeQuery();
@@ -199,11 +206,12 @@ public class ProductDAOImpl implements ProductDAO
 			while(resultSet.next())
 			{
 				product=new Product();
-				product.setId(resultSet.getString(1));
+				product.setId(resultSet.getInt(1));
 				product.setName(resultSet.getString(2));
 				product.setPrice(resultSet.getInt(3));
 				product.setDescription(resultSet.getString(4));
-				list.add(product);
+				product.setQuantity(resultSet.getInt(5));
+				products.add(product);
 			}
 		}
 		
@@ -227,30 +235,33 @@ public class ProductDAOImpl implements ProductDAO
 			}
 		}
 		
-		return list;
+		return products;
 	}
 
 	@Override
-	public List<Product> getProducts(String categoryId) 
+	public List<Product> getProducts(int categoryId) 
 	{
 		try
 		{
 			connection=ConnectionProvider.getConnection();
 		
-			list			  = new ArrayList<>();
-			query			  = "select * from product where categoryid=?";
+			products		  = new ArrayList<>();
+			query			  = "select * from product where category_id=?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, categoryId);
+
+			preparedStatement.setInt(1, categoryId);
+			
 			resultSet		  = preparedStatement.executeQuery();
 		
 			while(resultSet.next())
 			{
 				product=new Product();
-				product.setId(resultSet.getString(1));
+				product.setId(resultSet.getInt(1));
 				product.setName(resultSet.getString(2));
 				product.setPrice(resultSet.getInt(3));
 				product.setDescription(resultSet.getString(4));
-				list.add(product);
+				product.setQuantity(resultSet.getInt(5));
+				products.add(product);
 			}
 		}
 		
@@ -274,7 +285,90 @@ public class ProductDAOImpl implements ProductDAO
 			}
 		}
 		
-		return list;
+		return products;
 	}
 
-}
+	@Override
+	public int addSales(Sales sales) 
+	{
+		try 
+		{
+			connection		  = ConnectionProvider.getConnection();
+			query			  = "INSERT INTO SALES VALUES(?, SYSDATE ,?)";
+			preparedStatement = connection.prepareStatement(query);	
+			
+			preparedStatement.setString(1, sales.getCustomer().getEmail());
+			preparedStatement.setInt   (2, sales.getAmount());
+			status = preparedStatement.executeUpdate();
+		} 
+		
+		catch (SQLException e) 
+		{
+			System.out.println("---------------- EXCEPTION FROM PRODUCTDAOIMPL ADDSALES() CATCH BLOCK --------------");
+			e.printStackTrace();
+		}
+		
+		finally
+		{
+			try
+			{
+				connection.close();
+			}
+			
+			catch(SQLException e)
+			{
+				System.out.println("---------------- EXCEPTION FROM PRODUCTDAOIMP ADDSALES() CONNECTION CLOSING --------------");
+				e.printStackTrace();
+			}
+		}
+
+		return status;
+	}
+
+	@Override
+	public List<Sales> getSales() 
+	{
+		try
+		{
+			connection=ConnectionProvider.getConnection();
+		
+			sales			  = new ArrayList<>();
+			query			  = "SELECT * FROM SALES";
+			preparedStatement = connection.prepareStatement(query);
+			resultSet		  = preparedStatement.executeQuery();
+		
+			while(resultSet.next())
+			{
+				sale = new Sales();
+				sale.setCustomer(new CustomerDAOImpl().getCustomer( resultSet.getString(1)) );
+				sale.setDate  (resultSet.getDate(2));
+				sale.setAmount(resultSet.getInt(3));
+				
+				sales.add(sale);
+			}
+		}
+		
+		catch(SQLException e)
+		{
+			System.out.println("---------------- EXCEPTION FROM PRODUCTDAOIMPL GETSALES()CATCH BLOCK --------------");
+			e.printStackTrace();
+		}
+		
+		finally
+		{
+			try
+			{
+				connection.close();
+			}
+			
+			catch(SQLException e)
+			{
+				System.out.println("---------------- EXCEPTION FROM PRODUCTDAOIMPL GETSALES() CONNECTION CLOSING --------------");
+				e.printStackTrace();
+			}
+		}
+		
+		return sales;
+		}
+
+} 

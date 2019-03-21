@@ -20,29 +20,73 @@ import com.cart.model.Category;
 public class GetProducts extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private String categoryId;
+	private int categoryId;
 	private ProductDAO productDAO;
 	private HttpSession httpSession;
-	private String categoryName;
+	private String categoryName,requestFrom;
 	private List<Category> categories;
 	private Iterator<Category> iterator;
+	
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		try
 		{
-			categoryId  = request.getParameter("categoryId");
-			System.out.println("category id is =>"+categoryId);
-			System.out.println("session hai? "+httpSession);
-			productDAO  = new ProductDAOImpl();
 			httpSession = request.getSession(false);
+			requestFrom = (String) httpSession.getAttribute("requestFrom");
+			productDAO  = new ProductDAOImpl();
 			
-			if(httpSession == null)
+			
+			System.out.println("request is coming from "+requestFrom);
+			
+			if(requestFrom.equalsIgnoreCase("index.jsp"))
 			{
-				System.out.println("inside else session == null");
-				categoryName    = request.getParameter("category");
-				categories  = (List<Category>)getServletContext().getAttribute("categories");
-				iterator    = categories.iterator();
+				categoryName = request.getParameter("categoryName"); 
+			
+				categories   = (List<Category>)getServletContext().getAttribute("categories");
+				iterator     = categories.iterator();
+
+				while(iterator.hasNext())
+				{
+					Category category = iterator.next();
+					if(category.getName().equalsIgnoreCase(categoryName))
+					{
+						categoryId = category.getId();
+						request.setAttribute("products", productDAO.getProducts(categoryId));
+						System.out.println(request.getAttribute("products"));
+						request.getRequestDispatcher("/products.jsp").forward(request, response);
+					}
+				}
+			
+			}
+			
+			else// if(requestFrom.equalsIgnoreCase("displayproducts.jsp"))
+			{
+				categoryId   = Integer.parseInt(request.getParameter("categoryId"));
+			
+				httpSession.setAttribute("products", productDAO.getProducts(categoryId));
+				request.getRequestDispatcher("/displayproducts.jsp").forward(request, response);
+			}
+			
+			
+		/*  categoryId   = Integer.parseInt(request.getParameter("categoryId"));
+			productDAO   = new ProductDAOImpl();
+			//httpSession  = request.getSession(false);
+			
+			if(categoryId != 0)
+			{
+				httpSession  = request.getSession(false);
+				httpSession.setAttribute("products", productDAO.getProducts(categoryId));
+				request.getRequestDispatcher("/displayproducts.jsp").forward(request, response);
+			}
+			
+			else if(!categoryName.equals(null))
+			{
+				System.out.println("inside categoryname not equals to null");
+				
+				categoryName = request.getParameter("category");
+				categories   = (List<Category>)getServletContext().getAttribute("categories");
+				iterator     = categories.iterator();
 
 				while(iterator.hasNext())
 				{
@@ -57,15 +101,38 @@ public class GetProducts extends HttpServlet
 				}
 			}
 			
-			else if(httpSession.getAttribute("requestFrom") != null ) 
+			/*if(httpSession == null)
+			{
+				System.out.println("inside if session == null");
+				
+				categoryName = request.getParameter("category");
+				categories   = (List<Category>)getServletContext().getAttribute("categories");
+				iterator     = categories.iterator();
+
+				while(iterator.hasNext())
+				{
+					Category category = iterator.next();
+					if(category.getName().equalsIgnoreCase(categoryName))
+					{
+						categoryId = category.getId();
+						request.setAttribute("products", productDAO.getProducts(categoryId));
+						System.out.println(request.getAttribute("products"));
+						request.getRequestDispatcher("/products.jsp").forward(request, response);
+					}
+				}
+			}
+			
+			else
+			{
+				System.out.println("----------- SESSION NOT NULL FROM GETPRODUCTS.JAVA-------------");
+			}
+			
+			/*else if(httpSession.getAttribute("requestFrom") != null ) 
 			{
 				System.out.println("inside != null");
 				httpSession.setAttribute("products", productDAO.getProducts(categoryId));
 				request.getRequestDispatcher("/displayproducts.jsp").forward(request, response);
-			}
-			
-			
-			System.out.println("GADBAD HAI");
+			}*/
 			
 		}
 		

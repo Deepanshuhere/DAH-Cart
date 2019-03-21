@@ -44,29 +44,41 @@
 
 <p class="h4">Quantity</p>
 <div style="width:70px;">
-<select class="form-control" id="quantity" name="quantity" >
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
+
+<form action="CartProducts">
+
+<select class="custom-select" name="productQuantity" >
+<option value="1"  >1</option>
+<option value="2"  >2</option>
+<option value="3"  >3</option>
+<option value="4"  >4</option>
+<option value="5"  >5</option>
+<option value="6"  >6</option>
+<option value="7"  >7</option>
+<option value="8"  >8</option>
+<option value="9"  >9</option>
+<option value="10" >10</option>
 </select>
+
 </div>
 
 <div style="padding-top:100px">
-<button type="button" class="btn btn-primary" onClick="window.location.href='Cart?productId=${product.id}'">Add to cart<img src="images/other/cart.png" width="25" height="25" ></button>
-<button type="button" class="btn btn-primary" onClick="window.location.href=''">Buy Now</button>
+<input type="hidden" name="productId" value="${product.id}">
+<button type="submit" class="btn btn-primary" name="buyNow" value="false" >Add to cart <img src="images/other/cart.png" width="25" height="25" ></button>
+<button type="submit" class="btn btn-primary" name="buyNow" value="true"  >Buy Now     </button>
 </div>
+</form>
+
 </div>
 </div>
 </div>
 </div>
 </div>
 
-<div style="padding-left:70px; padding-top:50px;" >
+<div style="padding-left:70px; padding-top:30px;" >
 <button type="button" class="btn  btn-secondary" onClick="window.location.href='index.jsp'">Back</button>
 </div>
-s
+
 
 </body>
 </html>

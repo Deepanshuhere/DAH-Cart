@@ -27,7 +27,7 @@
 
 	<form action="UpdateProduct" method="post" >
 
-	   	<input type="hidden" class="form-control form-control-sm" name="id" value="${requestScope.product.id}" > 
+	   	<input type="hidden" class="form-control form-control-sm" name="id" value="${product.id}" > 
 
 
 	<div class="form-group ">
@@ -37,28 +37,27 @@
 
   	<div class="form-group">
     	<label for="name">Product Name</label>
-    	<input type="text" class="form-control form-control-sm" name="name" placeholder="Enter product name" value="${requestScope.product.name}" >
+    	<input type="text" class="form-control form-control-sm" name="name" placeholder="Enter product name" value="${product.name}" >
   	</div>
   	
-  	<div class="input-group mb-3">
-  		<div class="input-group-prepend">
-    		<span class="input-group-text" name="image">Image</span>
-  		</div>
   		
-  		<div class="custom-file">
-    		<input type="file" class="custom-file-input" name="image" aria-describedby="inputGroupFileAddon01">
-    		<label class="custom-file-label" for="inputGroupFile01">Choose Product Image</label>
-		</div>
-	</div>  	
   	
-  	<div class="form-group">
- 	   <label for="productPrice">Product Price</label>
- 	   <input type="text" class="form-control form-control-sm" name="price" placeholder="Enter Product Price" value="${requestScope.product.price }">
-  	</div>
+	<div class="form-row">
+  	<div class="form-group col-md-6">
+ 	    <label for="productPrice">Product Price</label>
+ 	  <input type="text" class="form-control" name="price" placeholder="Enter Product Price" value="${product.price }">
+
+ 	</div>
   	
+ 	<div class="form-group col-md-6">
+ 	    <label for="productPrice">Product Quantity</label>
+ 	  <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity" value="${product.quantity }">
+ 	</div>
+  	</div>  	
+
   	<div class="form-group">
   		<label for="comment">Product Description</label>
-  		<textarea class="form-control form-control-sm" name="description" rows="1" id="comment">${requestScope.product.description}</textarea>
+  		<textarea class="form-control form-control-sm" name="description" rows="1" id="comment">${product.description}</textarea>
 	</div>
   	
 	<button type="submit" class="btn btn-primary btn-sm">Update</button>

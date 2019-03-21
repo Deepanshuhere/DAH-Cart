@@ -80,7 +80,7 @@
              	<li class="nav-item">
         			<a class="nav-link" href="cart.jsp" >
         			 	<img src="images/other/cart.png" width="25" height="25" >${cartQuantity}
-         		    </a>
+					</a>
           		</li>
              	</c:if>
 				             

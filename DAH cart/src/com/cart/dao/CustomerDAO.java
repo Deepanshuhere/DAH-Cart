@@ -13,4 +13,6 @@ public interface CustomerDAO
 	public int update(Customer customer,String email);
 	public Customer getCustomer(String email);
 	public List<Customer> getAllCustomers();
+	public boolean checkUser(String email,String answer);
+	public int updatePassword(String email,String newPassword);
 }

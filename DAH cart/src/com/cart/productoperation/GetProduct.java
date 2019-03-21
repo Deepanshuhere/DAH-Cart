@@ -15,7 +15,7 @@ public class GetProduct extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private ProductDAO productDAO;
-	private String productId;
+	private int productId;
 	private String requestFrom;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -23,8 +23,9 @@ public class GetProduct extends HttpServlet
 		try 
 		{
 			requestFrom = request.getParameter("request_coming");
-			productId   = request.getParameter("id");
-			productDAO=new ProductDAOImpl();								 
+			productId   = Integer.parseInt(request.getParameter("id"));
+			productDAO  = new ProductDAOImpl();								 
+	
 			request.setAttribute("product",productDAO.getProduct(productId));    
 	
 			if(requestFrom != null)
@@ -39,7 +40,5 @@ public class GetProduct extends HttpServlet
 			System.out.println("-------- INSIDE GETPRODUCT.JAVA CATCH --------");
 			exception.printStackTrace();								
 		}
-		
-	
 	}
 }

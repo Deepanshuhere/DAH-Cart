@@ -20,6 +20,7 @@ public class Signup extends HttpServlet {
 	private long phone;
 	private String email;
 	private String password;
+	private String answer;
 	private Customer customer;
 	private CustomerDAO customerDAO;
 	private RequestDispatcher requestDispatcher;
@@ -31,6 +32,7 @@ public class Signup extends HttpServlet {
 		phone	 = Long.parseLong(request.getParameter("number"));
 		email	 = request.getParameter("email");
 		password = request.getParameter("password");
+		answer   = request.getParameter("answer");
 		
 		customer	= new Customer();
 		customerDAO	= new CustomerDAOImpl();
@@ -41,6 +43,7 @@ public class Signup extends HttpServlet {
 		customer.setEmail(email);
 		customer.setPassword(password);
 		customer.setRole(null);
+		customer.setAnswer(answer);
 		
 		try 
 		{

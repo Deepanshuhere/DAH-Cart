@@ -19,6 +19,7 @@ public class CategoryDAOImpl implements CategoryDAO
 	private String query;
 	private Category category;
 	private int status;
+	private int categoryId;
 	
 	@Override
 	public int add(Category category) 
@@ -29,7 +30,7 @@ public class CategoryDAOImpl implements CategoryDAO
 			query			  = "insert into category values(?,?)";
 			preparedStatement = connection.prepareStatement(query);
 	
-			preparedStatement.setString(1, category.getId());
+			preparedStatement.setInt(1, category.getId());
 			preparedStatement.setString(2, category.getName());
 			status = preparedStatement.executeUpdate();
 		}
@@ -71,7 +72,7 @@ public class CategoryDAOImpl implements CategoryDAO
 			while(resultSet.next())
 			{
 				category = new Category();
-				category.setId  (resultSet.getString(1));
+				category.setId  (resultSet.getInt(1));
 				category.setName(resultSet.getString(2));
 				categoryList.add(category);
 			}
@@ -102,23 +103,23 @@ public class CategoryDAOImpl implements CategoryDAO
 	}
 
 	@Override
-	public int delete(String categoryId)
+	public int delete(int categoryId)
 	{
 		try
 		{
 			connection		  = ConnectionProvider.getConnection();
-			query			  ="SELECT * FROM PRODUCT WHERE CATEGORYID=?";
+			query			  ="SELECT * FROM PRODUCT WHERE CATEGORY_ID=?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, categoryId);
+			preparedStatement.setInt(1, categoryId);
 			resultSet 		  = preparedStatement.executeQuery();
 			
 			if(resultSet.next())
 				return status;
 
-			query			  = "DELETE FROM CATEGORY WHERE CATEGORYID=?";
+			query			  = "DELETE FROM CATEGORY WHERE CATEGORY_ID=?";
 			preparedStatement = connection.prepareStatement(query);
 
-			preparedStatement.setString(1, categoryId);
+			preparedStatement.setInt(1, categoryId);
 
 			status = preparedStatement.executeUpdate();
 		}
@@ -138,11 +139,50 @@ public class CategoryDAOImpl implements CategoryDAO
 			
 			catch(SQLException e)
 			{
-				System.out.println("---------------- EXCEPTION FROM CATEGORYDAOIMPL DELETE() CONNECTION CLOSING --------------");
+				System.out.println("------- --------- EXCEPTION FROM CATEGORYDAOIMPL DELETE() CONNECTION CLOSING --------------");
 				e.printStackTrace();
 			}
 		}
 		
 		return status;
 	}
+
+	/*@Override
+	public int getCategoryId(String categoryName) 
+	{
+		try
+		{
+			connection		  = ConnectionProvider.getConnection();
+			query			  = "SELECT CATEGORY_ID FROM CATEGORY WHERE CATEGORY_NAME=?";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, categoryName);
+			
+			resultSet 		  = preparedStatement.executeQuery();
+			
+			if(resultSet.next())
+				categoryId = resultSet.getInt(1);
+		}
+		
+		catch(SQLException e)
+		{
+			System.out.println("----------- EXCEPTION FROM CATEGORYDAOIMPL  DELETE() --------------");
+			e.printStackTrace();
+		}
+
+		finally
+		{
+			try
+			{
+				connection.close();
+			}
+			
+			catch(SQLException e)
+			{
+				System.out.println("------- --------- EXCEPTION FROM CATEGORYDAOIMPL DELETE() CONNECTION CLOSING --------------");
+				e.printStackTrace();
+			}
+		}
+		return categoryId;
+	}*/
 }

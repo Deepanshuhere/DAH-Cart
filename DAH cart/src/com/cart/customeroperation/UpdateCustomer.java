@@ -20,6 +20,7 @@ public class UpdateCustomer extends HttpServlet
 	private String email;
 	private String oldEmail;
 	private String password;
+	private String answer;
 	private Customer customer;
 	private CustomerDAO customerDAO;
 	private int status;
@@ -32,6 +33,7 @@ public class UpdateCustomer extends HttpServlet
 			number	 	= Long.parseLong(request.getParameter("number"));
 			email 	 	= request.getParameter("email");
 			password 	= request.getParameter("password");
+			answer		= request.getParameter("answer");
 			customer 	= new Customer();
 			customerDAO = new CustomerDAOImpl();
 			oldEmail 	= (String)request.getSession(false).getAttribute("email");
@@ -40,6 +42,7 @@ public class UpdateCustomer extends HttpServlet
 			customer.setPhone(number);
 			customer.setEmail(email);
 			customer.setPassword(password);
+			customer.setAnswer(answer);
 			
 			status = customerDAO.update(customer, oldEmail);
 			

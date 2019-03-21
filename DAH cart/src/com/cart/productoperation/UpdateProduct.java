@@ -3,7 +3,6 @@ package com.cart.productoperation;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,31 +18,34 @@ import com.cart.model.Product;
 public class UpdateProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductDAO productDAO;
-	private String productId,productName,productDescription;
-	private int productPrice;
+	private String productName,productDescription;
+	private int productId,productPrice,productQuantity;
 	private Product product;
 	private int updateStatus;
 	private HttpSession httpSession;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		System.out.println("INSIDE UPDATE PRODUCT!!");
 
 		try 
 		{
-			productId 	 	   = request.getParameter("id");
+			productId 	 	   = Integer.parseInt(request.getParameter("id"));
 			productName        = request.getParameter("name");
 			productPrice 	   = Integer.parseInt(request.getParameter("price"));
 			productDescription = request.getParameter("description");
+			productQuantity    = Integer.parseInt(request.getParameter("quantity"));
 			product 		   = new Product();
-
+			
 			product.setId(productId);
 			product.setName(productName);
 			product.setPrice(productPrice);
 			product.setDescription(productDescription);
+			product.setQuantity(productQuantity);
 			
 			productDAO   = new ProductDAOImpl();
 			updateStatus = productDAO.update(product);
+			System.out.println("UPDATE STATUS IS ======> "+updateStatus);
 		}
 		
 		catch(Exception exception) 
@@ -56,16 +58,20 @@ public class UpdateProduct extends HttpServlet {
 		if(updateStatus == 1)
 		{
 			httpSession = request.getSession(false);
-			if(httpSession != null)
-				httpSession.setAttribute("products", productDAO.getAllProducts());
 			
+			httpSession.setAttribute("products", productDAO.getAllProducts());
 			request.getRequestDispatcher("/displayproducts.jsp").forward(request, response);
 		}
 		
 		else
 		{
-			request.getRequestDispatcher("/update.jsp").forward(request, response);
-		}
+			//jk
+/*			httpSession = request.getSession(false);
+			
+			//httpSession.setAttribute("requestFrom", "updateproduct.jsp");
+			request.setAttribute("id", productId);
+			request.getRequestDispatcher("/GetProduct").forward(request, response);
+*/		}
 
 	}
 }

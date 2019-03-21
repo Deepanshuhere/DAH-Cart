@@ -22,27 +22,26 @@
 	<div class="card mx-auto " style="width: 25rem;">
   		<div class="card-body">
   			<h5 class="card-title text-center">LOGIN</h5>
-    		
-
-<!-- FORM START ${pageContext.request.contextPath}/ -->
-  <form action="Login" method="post">
+<!-- FORM START -->    		
+<form action="Login" method="post">
  
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address or Number</label>
-    <input type="text" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter email or number">
+    <input type="text" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter your email or number">
     <small id="emailHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
   </div>
   
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
   </div>
   
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
 <!-- FORM END -->
-
-   </br> 		
+	
+	</br>
+		<a href="forgotpassword.jsp" class="card-link">Forgot your password?</a>
+	</br>
+    </br> 		
     		<p>Don't have an account? <a href="signup.jsp" class="card-link"> Create a new account</a></p>
   		</div>
 	</div>

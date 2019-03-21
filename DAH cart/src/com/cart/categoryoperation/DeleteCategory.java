@@ -15,7 +15,7 @@ import com.cart.dao.CategoryDAOImpl;
 public class DeleteCategory extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private String categoryId;
+	private int categoryId;
 	private CategoryDAO categoryDAO;
 	private int status;
 	
@@ -23,7 +23,7 @@ public class DeleteCategory extends HttpServlet
 	{
 		try
 		{
-			categoryId  = request.getParameter("id");
+			categoryId  = Integer.parseInt(request.getParameter("id"));
 			categoryDAO = new CategoryDAOImpl();
 			status 	    = categoryDAO.delete(categoryId);
 			

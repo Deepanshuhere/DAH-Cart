@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="col-12 col-sm-6 col-lg-9">
                   <ul class="list-inline">
-                    <li class="list-inline-item">&copy; 2018 DAH-CART, Inc.</li>
+                    <li class="list-inline-item">&copy; 2019 DAH-CART, Inc.</li>
                     <li class="list-inline-item">All rights reserved.</li>
                   </ul>
                 </div>

@@ -16,7 +16,7 @@ import com.cart.dao.ProductDAOImpl;
 public class DeleteProduct extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private String productId;
+	private int productId;
 	private ProductDAO productDAO;
 	private int status;
 	private HttpSession httpSession;
@@ -25,7 +25,7 @@ public class DeleteProduct extends HttpServlet
 	{
 		try
 		{
-			productId  = request.getParameter("id");
+			productId  = Integer.parseInt(request.getParameter("id"));
 			productDAO = new ProductDAOImpl();
 			status 	   = productDAO.delete(productId);
 			

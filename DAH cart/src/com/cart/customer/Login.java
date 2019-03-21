@@ -18,8 +18,9 @@ import com.cart.dao.CustomerDAO;
 import com.cart.dao.CustomerDAOImpl;
 import com.cart.dao.ProductDAO;
 import com.cart.dao.ProductDAOImpl;
+import com.cart.model.Cart;
 import com.cart.model.Customer;
-import com.cart.model.Product;
+import com.cart.model.Sales;
 
 @WebServlet("/Login")									
 public class Login extends HttpServlet 
@@ -35,7 +36,9 @@ public class Login extends HttpServlet
 	private ProductDAO productDAO;
 	private CategoryDAO categoryDAO;
 	private int cartQuantity;
-	private List<Product> cartProducts;
+	private List<Cart> cartProducts;
+	private List<Sales> sales;
+	private long cartAmount;
 	
 	private boolean isNumber(String id)
 	{
@@ -75,7 +78,6 @@ public class Login extends HttpServlet
 				{
 					httpSession  = request.getSession();
 					productDAO   = new ProductDAOImpl();
-					cartProducts = new ArrayList<>();
 					
 					httpSession.setAttribute("role",userName);
 					httpSession.setAttribute("indexRef", "admin.jsp");
@@ -85,7 +87,7 @@ public class Login extends HttpServlet
 					httpSession.setAttribute("products", productDAO.getAllProducts());
 					httpSession.setAttribute("email", customer.getEmail());
 					httpSession.setAttribute("categories", categoryDAO.getAll());
-					httpSession.setAttribute("cartProducts", cartProducts);
+					httpSession.setAttribute("sales", productDAO.getSales());
 					
 					//httpSession.setMaxInactiveInterval(10);
 					requestDispatcher=request.getRequestDispatcher("/admin.jsp");
@@ -94,13 +96,20 @@ public class Login extends HttpServlet
 			
 				else if(customer.getRole().equals("ROLE_USER"))
 				{
-					httpSession = request.getSession();
+					httpSession  = request.getSession();
+					cartProducts = new ArrayList<Cart>();
+					cartQuantity = 0;
+					cartAmount	 = 0L;
+					
 					httpSession.setAttribute("login", "");
 					httpSession.setAttribute("role",userName);
 					httpSession.setAttribute("indexRef", "index.jsp");
 					httpSession.setAttribute("email", customer.getEmail());
 					httpSession.setAttribute("categories", categoryDAO.getAll());
+					httpSession.setAttribute("cartProducts", cartProducts);
 					httpSession.setAttribute("cartQuantity", cartQuantity);
+					httpSession.setAttribute("cartAmount", cartAmount);
+					
 					//httpSession.setMaxInactiveInterval(10);
 					requestDispatcher=request.getRequestDispatcher("/index.jsp");
 					requestDispatcher.forward(request, response);

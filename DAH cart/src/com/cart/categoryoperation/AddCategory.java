@@ -25,7 +25,7 @@ public class AddCategory extends HttpServlet
 		categoryName		= request.getParameter("categoryName");
 		category			= new Category();
 		
-		category.setId(null);
+		category.setId(0);
 		category.setName(categoryName);
 		
 		categoryDAO			= new CategoryDAOImpl();

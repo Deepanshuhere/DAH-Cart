@@ -26,7 +26,7 @@ public class CustomerDAOImpl implements CustomerDAO
 		try
 		{
 			connection		  = ConnectionProvider.getConnection();
-			query			  = "insert into customer values(?,?,?,?,?,?)";	
+			query			  = "INSERT INTO CUSTOMER VALUES(?,?,?,?,?,?,?,?)";	
 			preparedStatement = connection.prepareStatement(query);	
 		
 			preparedStatement.setString(1, customer.getName());
@@ -35,6 +35,8 @@ public class CustomerDAOImpl implements CustomerDAO
 			preparedStatement.setString(4, customer.getEmail());
 			preparedStatement.setString(5, customer.getPassword());
 			preparedStatement.setString(6, customer.getRole());
+			preparedStatement.setString(7, customer.getAnswer());
+			preparedStatement.setString(8, null);
 				
 			status = preparedStatement.executeUpdate();
 		}
@@ -85,6 +87,7 @@ public class CustomerDAOImpl implements CustomerDAO
 				customer.setEmail	 (resultSet.getString(4));
 				customer.setPassword (resultSet.getString(5));
 				customer.setRole	 (resultSet.getString(6));
+				customer.setAnswer	 (resultSet.getString(7));
 			}
 					
 		}
@@ -128,13 +131,17 @@ public class CustomerDAOImpl implements CustomerDAO
 		try
 		{
 			connection 	      = ConnectionProvider.getConnection();
-			query	   		  = "UPDATE CUSTOMER SET NAME = ?, PHONE = ?, EMAIL = ?, PASSWORD = ? WHERE EMAIL = ?";
+			query	   		  = "UPDATE CUSTOMER SET NAME = ?, PHONE = ?, EMAIL = ?, PASSWORD = ?, ANSWER = ?, ADDRESS = ? WHERE EMAIL = ?";
 			preparedStatement = connection.prepareStatement(query);
+			
 			preparedStatement.setString(1, customer.getName());
 			preparedStatement.setLong  (2, customer.getPhone());
 			preparedStatement.setString(3, customer.getEmail());
 			preparedStatement.setString(4, customer.getPassword());
-			preparedStatement.setString(5, oldEmail);
+			preparedStatement.setString(5, customer.getAnswer());
+			preparedStatement.setString(6, customer.getAddress());
+			preparedStatement.setString(7, oldEmail);
+			
 			
 			status = preparedStatement.executeUpdate();		
 		}
@@ -183,6 +190,7 @@ public class CustomerDAOImpl implements CustomerDAO
 				customer.setEmail	(resultSet.getString(4));
 				customer.setPassword(resultSet.getString(5));
 				customer.setRole	(resultSet.getString(6));
+				customer.setAnswer	(resultSet.getString(7));
 				
 				if(!resultSet.getString(1).equals("Admin"))	
 					customerList.add(customer);
@@ -235,6 +243,7 @@ public class CustomerDAOImpl implements CustomerDAO
 				customer.setEmail	 (resultSet.getString(4));
 				customer.setPassword (resultSet.getString(5));
 				customer.setRole	 (resultSet.getString(6));
+				customer.setAnswer	 (resultSet.getString(7));
 			}
 		}
 
@@ -288,6 +297,7 @@ public class CustomerDAOImpl implements CustomerDAO
 				customer.setEmail	(resultSet.getString(4));
 				customer.setPassword(resultSet.getString(5));
 				customer.setRole	(resultSet.getString(6));
+				customer.setAnswer	(resultSet.getString(7));
 			}			
 		}
 		
@@ -312,5 +322,87 @@ public class CustomerDAOImpl implements CustomerDAO
 		}
 		
 		return customer;
+	}
+
+	@Override
+	public boolean checkUser(String email, String answer) 
+	{
+		try
+		{
+			connection 		  = ConnectionProvider.getConnection(); 
+			query	   		  = "SELECT * FROM CUSTOMER WHERE EMAIL=? AND ANSWER=?";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, answer);
+			
+			resultSet  = preparedStatement.executeQuery();
+			
+			if(resultSet.next())
+				return true;
+		
+		}
+		
+		catch(SQLException e)
+		{
+			System.out.println("---------------- EXCEPTION FROM CUSTOMERDAOIMPL CHECKUSER() -----------------");
+			e.printStackTrace();
+		}
+		
+		finally
+		{
+			try
+			{
+				connection.close();
+			}
+			
+			catch(SQLException e)
+			{
+				System.out.println("---------------- EXCEPTION FROM CUSTOMERDAOIMPL CHECKUSER() CLOSING CONNECTION -----------------");
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int updatePassword(String email, String newPassword) 
+	{
+		try
+		{
+			connection 		  = ConnectionProvider.getConnection(); 
+			query	   		  = "UPDATE CUSTOMER SET PASSWORD = ? WHERE EMAIL = ?";
+			preparedStatement = connection.prepareStatement(query);
+
+			System.out.println("email in dao is ->"+email);
+			System.out.println("password in dao is ->"+newPassword);
+			
+			preparedStatement.setString(1, newPassword);
+			preparedStatement.setString(2, email);
+
+			status = preparedStatement.executeUpdate();
+			System.out.println("###################"+status+"#################");
+		}
+		
+		catch(SQLException e)
+		{
+			System.out.println("---------------- EXCEPTION FROM CUSTOMERDAOIMPL UPDATEPASSWORD() -----------------");
+			e.printStackTrace();
+		}
+		
+		finally
+		{
+			try
+			{
+				connection.close();
+			}
+			
+			catch(SQLException e)
+			{
+				System.out.println("---------------- EXCEPTION FROM CUSTOMERDAOIMPL UPDATEPASSWORD() CLOSING CONNECTION -----------------");
+				e.printStackTrace();
+			}
+		}
+		return status;
 	}
 }

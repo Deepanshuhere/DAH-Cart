@@ -31,7 +31,7 @@
   </div>
    
    <div class="form-group">
-    <label for="name">Phone No</label>
+    <label for="phone no">Phone No</label>
     <input type="text" class="form-control form-control-sm" name="number" value="${requestScope.customer.phone}" >
   </div>
   
@@ -43,6 +43,11 @@
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="text" class="form-control form-control-sm" name="password" id="exampleInputPassword1" value="${requestScope.customer.password }">
+  </div>
+  
+  <div class="form-group">
+    <label for="answer">Security Answer</label>
+    <input type="text" class="form-control form-control-sm" name="answer" value="${requestScope.customer.answer }">
   </div>
   
   <button type="submit" class="btn btn-primary">Update</button>

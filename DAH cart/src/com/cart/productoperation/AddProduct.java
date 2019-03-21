@@ -27,8 +27,8 @@ import org.apache.commons.io.IOUtils;
 public class AddProduct extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private String categoryId,productName,path,productDescription,fileName;
-	private int productPrice;
+	private String productName,path,productDescription,fileName;
+	private int productPrice,categoryId,productQuantity;
 	private Product product;
 	private Part part;
 	private InputStream inputStream;
@@ -42,32 +42,33 @@ public class AddProduct extends HttpServlet
 		productName        = request.getParameter("name");
 		productPrice	   = Integer.parseInt(request.getParameter("price"));
 		productDescription = request.getParameter("description");
-		categoryId		   = request.getParameter("categoryId");
-
+		categoryId		   = Integer.parseInt(request.getParameter("categoryId"));
+		productQuantity	   = Integer.parseInt(request.getParameter("quantity"));
+		
 		System.out.println();
 		System.out.println();
-		System.out.println("category id is =>"+categoryId);
+		System.out.println("category id is =>"+categoryId);  
 		System.out.println();
 		System.out.println();
 		
 		product=new Product();
-		product.setId(null);
+		product.setId(0);
 		product.setName(productName);
 		product.setPrice(productPrice);
 		product.setDescription(productDescription);
 		product.setCategoryId(categoryId);
+		product.setQuantity(productQuantity);
 		
 		part=request.getPart("image");
 		inputStream=part.getInputStream();
 		bytes = IOUtils.toByteArray(inputStream);
-		path="D:\\workspace\\spring_eclipse\\DAH cart\\WebContent\\images\\product image";
-		fileName=path+File.separator+product.getId()+".jpg";
+		path="C:\\Users\\Deepanshu Sharma\\git\\deepanshu.github.project\\DAH cart\\WebContent\\images\\product image";
+		fileName=path+File.separator+String.valueOf(product.getId())+".jpg";
+		System.out.println(fileName);
 		fileOutputStream=new FileOutputStream(fileName);
 		fileOutputStream.write(bytes);
-		
-		/*
-		 create table product(id varchar2(20) primary key,name varchar2(100),price number,description varchar2(1500),category_id references category(categoryid));
-		  */
+		fileOutputStream.close();
+		System.out.println("PRODUCT ID IS ===================================> "+product.getId());
 		
 		productDAO=new ProductDAOImpl();
 		

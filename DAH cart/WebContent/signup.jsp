@@ -26,13 +26,11 @@
   <form action="Signup" method="post">
   
   <div class="form-group">
-    <label for="name">Name</label>
     <input type="text" class="form-control form-control-sm" name="name"  placeholder="Enter your name">
   </div>
   
 <div class="form-group">
 
-<label for="gender">Gender</label>
  <div class="form-check form-check-inline">
   <label class="form-check-label">
 	    <input type="radio" class="form-check-input" name="gender" value="Men" >Men
@@ -47,22 +45,23 @@
 </div>
    
    <div class="form-group">
-    <label for="name">Phone No</label>
     <input type="text" class="form-control form-control-sm" name="number"  placeholder="Enter your number">
   </div>
   
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control form-control-sm" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
     <small class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control form-control-sm" name="password" id="exampleInputPassword1" placeholder="Password">
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group">
+  	<input type="text" class="form-control form-control-sm" name="answer" placeholder="Enter your nick name (SECURITY QUESTION)">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
     		<br>
     		<p>Already have an account? <a href="login.jsp" class="card-link">Login</a> </p>

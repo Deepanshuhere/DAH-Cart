@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="true" %>
 <jsp:include page="header.jsp" />
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -65,8 +65,7 @@
        		<div class="col-2">
         	<div class="card" >
         	<div>
-        	<input type="hidden" name="request_coming" value="index">
-       						<a onClick="window.location.href='GetProduct?id=${product.id}'">
+        					<a onClick="window.location.href='GetProduct?id=${product.id}'">
         					<img class="card-img-top" src="images/product image/${product.id}.jpg" alt="Card image cap" width="600px" height="250px">
 							</a>
 			</div>				
@@ -74,7 +73,7 @@
 								<div class="card-body">
 					       			<h5 class="card-title small">${product.name}</h5>
                     				<p class="font-weight-normal">${product.price}
-                    				<a href="Cart?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
+                    				<a href="CartProducts?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
                     			</div>
            				   </tr>
            </div>
@@ -82,7 +81,10 @@
            </c:forEach>
            
            <div style="padding-top:150px;">
-           <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='GetProducts?category=Men'" style="height:50px;">All Men Clothing</button>
+           
+           <% session.setAttribute("requestFrom","index.jsp"); %>
+           
+		   <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='GetProducts?categoryName=Men'" style="height:50px;">All Men Clothing</button>
            </div>
           </div>
         </div>
@@ -109,7 +111,7 @@
 								<div class="card-body">
 					       			<h5 class="card-title small">${product.name}</h5>
                     				<p class="font-weight-normal">${product.price}
-                    				<a href="Cart?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
+                    				<a href="CartProducts?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
                     			</div>
            				   </tr>
            </div>
@@ -117,7 +119,7 @@
            </c:forEach>
            
            <div style="padding-top:150px;">
-           <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='GetProducts?category=Women'" style="height:50px;">All Women Clothing</button>
+           <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='GetProducts?categoryName=Women'" style="height:50px;">All Women Clothing</button>
            </div>
           </div>
         </div>

@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  </form>
+ 
   
   <div class="col-sm">
     <div class="card">
@@ -52,12 +52,12 @@
         <h5 class="card-title">Sales</h5>
         <p class="card-text">Track the the sales records </p>
       
-      	<button class="btn btn-primary" onClick="window.location.href='sales.jsp'" > View Sales </button>
+      	<button class="btn btn-primary" formaction="sales.jsp" > View Sales </button>
               
       </div>
     </div>
   </div>
-  
+  </form> 
   <div class="col-sm">
     <div class="card">
       <div class="card-body">

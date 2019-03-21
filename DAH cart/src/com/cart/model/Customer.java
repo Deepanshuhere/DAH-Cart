@@ -11,6 +11,8 @@ public class Customer implements Serializable
 	private String email;
 	private String password;
 	private String role;
+	private String answer;
+	private String address;
 
 	public String getName() {
 		return name;
@@ -55,6 +57,18 @@ public class Customer implements Serializable
 	}
 	public void setPhone(long phone) {
 		this.phone = phone;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

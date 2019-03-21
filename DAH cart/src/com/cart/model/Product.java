@@ -6,19 +6,24 @@ import java.util.UUID;
 public class Product implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private int id;
 	private String name;
 	private String description;
-	private String categoryId;
+	private int categoryId;
 	private int price;
-	public String getId() {
+	private int quantity;
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) 
+	public void setId(int id) 
 	{
-		if(id==null)
-			this.id = UUID.randomUUID().toString().substring(2,7);
-	
+		if(id == 0)
+		{
+			System.out.println("inside setid() if");
+			this.id = UUID.randomUUID().toString().substring(1, 4).hashCode();
+		}
+			
 		else
 			this.id=id;
 	}
@@ -34,10 +39,10 @@ public class Product implements Serializable
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 	public int getPrice() {
@@ -45,6 +50,12 @@ public class Product implements Serializable
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 }

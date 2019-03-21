@@ -6,19 +6,19 @@ import java.util.UUID;
 public class Category implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private int id;
 	private String name;
 	
-	public String getId() 
+	public int getId() 
 	{
 		return id;
 	}
 	
-	public void setId(String id) 
+	public void setId(int id) 
 	{
-		if(id == null)		
-			this.id= UUID.randomUUID().toString().substring(0, 5);
-			
+		if(id == 0)		
+			this.id = UUID.randomUUID().toString().substring(1, 4).hashCode();
+		
 		else	
 			this.id = id;
 	}

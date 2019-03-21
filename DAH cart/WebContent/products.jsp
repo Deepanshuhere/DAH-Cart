@@ -40,7 +40,7 @@
 								<div class="card-body">
 					       			<h5 class="card-title small">${product.name}</h5>
                     				<p class="font-weight-normal">${product.price}
-                    				<a href="Cart?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
+                    				<a href="CartProducts?productId=${product.id}" class="btn btn-sm btn-primary">Add <img src="images/other/cart.png" width="25" height="25" ></a></p>
                     			</div>
            				   </tr>
            </div>

@@ -41,7 +41,10 @@
 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Filter
 </button>
+
+
 <% session.setAttribute("requestFrom","displayproducts.jsp"); %>
+
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		<a class="dropdown-item" href="GetAllProducts">All</a>
 		<c:forEach items="${categories}" var="category" >
@@ -71,25 +74,22 @@ Sort By
   <thead>
     <tr>
       <th scope="col">Image</th>
-      <th scope="col">Product Id</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
       <th scope="col">Description</th>
-      <th scope="col">Task</th>
-      
-     
+      <th scope="col">Operation</th>
+    
     </tr>
   </thead>
   <tbody>  
   
-  	
-  	
   	<c:forEach items="${products}" var="product">
        <tr>
          <td class="col-1"><img src="images/product image/${product.id}.jpg" class="img-responsive" alt="Image not found :/" width="200px" height="100px" > </td>
-         <td class="col-2">${product.id}</td>
          <td class="col-3">${product.name}</td>
          <td class="col-1">Rs.${product.price}</td>
+		 <td class="col-1">${product.quantity}</td>
        	 <td class="col-3">${product.description}</td>
        	 <td class="col-2">
        	 	<input type="hidden" name="request_coming" value="displayproducts">
@@ -104,16 +104,6 @@ Sort By
 </div>
 </div>
 </form>
-
-<%-- <%
-HttpSession session=request.getSession(false);
-if(session == null)
-	System.out.println("session nahi hai");
-
-else
-	System.out.println("session hai ");
-
-%> --%>
 
 </body>
 </html>

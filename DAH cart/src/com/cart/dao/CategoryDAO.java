@@ -7,6 +7,7 @@ import com.cart.model.Category;
 public interface CategoryDAO 
 {
 	public int add(Category category);
-	public int delete(String categoryId);
+	public int delete(int categoryId);
 	public List<Category> getAll();
+	//public int getCategoryId(String categoryName);
 }
