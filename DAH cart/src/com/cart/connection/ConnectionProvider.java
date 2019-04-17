@@ -16,7 +16,6 @@ public class ConnectionProvider
 	private static String username;
 	private static String password;
 
-	@SuppressWarnings("unchecked")
 	public static Connection getConnection()
 	{
 		try 

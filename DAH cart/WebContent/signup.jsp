@@ -26,10 +26,10 @@
   <form action="Signup" method="post">
   
   <div class="form-group">
-    <input type="text" class="form-control form-control-sm" name="name"  placeholder="Enter your name">
+    <input type="text" class="form-control form-control-sm" name="name"  placeholder="Enter your name" required>
   </div>
   
-<div class="form-group">
+<div class="form-group" required>
 
  <div class="form-check form-check-inline">
   <label class="form-check-label">
@@ -45,20 +45,20 @@
 </div>
    
    <div class="form-group">
-    <input type="text" class="form-control form-control-sm" name="number"  placeholder="Enter your number">
+    <input type="text" class="form-control form-control-sm" name="number"  placeholder="Enter your number" required>
   </div>
   
   <div class="form-group">
-    <input type="email" class="form-control form-control-sm" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+    <input type="email" class="form-control form-control-sm" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required />
     <small class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   
   <div class="form-group">
-    <input type="password" class="form-control form-control-sm" name="password" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control form-control-sm" name="password" id="exampleInputPassword1" placeholder="Password" required>
   </div>
   
   <div class="form-group">
-  	<input type="text" class="form-control form-control-sm" name="answer" placeholder="Enter your nick name (SECURITY QUESTION)">
+  	<input type="text" class="form-control form-control-sm" name="answer" placeholder="Enter your nick name (SECURITY QUESTION)" required>
   </div>
   
   <button type="submit" class="btn btn-primary">Sign Up</button>

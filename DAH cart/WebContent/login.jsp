@@ -26,12 +26,12 @@
 <form action="Login" method="post">
  
   <div class="form-group">
-    <input type="text" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter your email or number">
+    <input type="text" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter your email or number" required>
     <small id="emailHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
   </div>
   
   <div class="form-group">
-    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password" required>
   </div>
   
   <button type="submit" class="btn btn-primary">Login</button>
