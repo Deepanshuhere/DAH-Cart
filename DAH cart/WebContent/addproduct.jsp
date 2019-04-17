@@ -44,7 +44,7 @@
 	</div>
 
   	<div class="form-group">
-    	<input type="text" class="form-control" name="name" placeholder="Enter product name">
+    	<input type="text" class="form-control" name="name" placeholder="Enter product name" required>
   	</div>
   	
   	<div class="input-group mb-3">
@@ -53,24 +53,24 @@
   		</div>
   		
   		<div class="custom-file">
-    		<input type="file" class="custom-file-input" name="image" aria-describedby="inputGroupFileAddon01">
+    		<input type="file" class="custom-file-input" name="image" aria-describedby="inputGroupFileAddon01" required>
     		<label class="custom-file-label" for="inputGroupFile01">Choose Product Image</label>
 		</div>
 	</div>  	
   	
   	<div class="form-row">
   	<div class="form-group col-md-6">
- 	   <input type="text" class="form-control" name="price" placeholder="Enter Product Price">
+ 	   <input type="text" class="form-control" name="price" placeholder="Enter Product Price" required>
 
  	</div>
   	
  	<div class="form-group col-md-6">
- 	   <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity">
+ 	   <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity" required>
  	</div>
   	</div>
   	  	
   	<div class="form-group ">
-  		<textarea class="form-control" name="description" rows="1" id="comment" placeholder="Enter Product Description"></textarea>
+  		<textarea class="form-control" name="description" rows="1" id="comment" placeholder="Enter Product Description"required ></textarea>
 	</div>
   	
 	<button type="submit" class="btn btn-primary">Add</button>

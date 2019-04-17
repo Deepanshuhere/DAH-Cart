@@ -26,7 +26,7 @@
 			
 		<div class="form-group">
 			<label for="name">Enter your new password</label>
-   			<input type="text" class="form-control" name="password" placeholder="Enter the password">
+   			<input type="text" class="form-control" name="password" placeholder="Enter the password" required>
    			<input type="hidden" name="email" value="${requestScope.email }">
 		</div>
 		

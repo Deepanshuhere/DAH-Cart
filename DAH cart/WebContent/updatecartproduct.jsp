@@ -43,11 +43,11 @@
 <p class="card-text">${cartproduct.product.description}</p>
 
 <div class="h4">Quantity</div>
-<input type="text" name="productQuantity" value="${cartproduct.product.quantity }">
+<input type="text" name="productQuantity" value="${cartproduct.product.quantity }" required>
 </div>
 
 <div style="padding-top:100px; padding-left:30px;">
-<input type="hidden" name="productId" value="${cartproduct.product.id}">
+<input type="hidden" name="productId" value="${cartproduct.product.id}" required>
 <button type="submit" class="btn btn-primary">Update Cart</button>
 </div>
 </form>

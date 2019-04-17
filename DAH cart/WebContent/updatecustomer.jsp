@@ -27,27 +27,27 @@
   
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control form-control-sm" name="name" value="${requestScope.customer.name }">
+    <input type="text" class="form-control form-control-sm" name="name" value="${requestScope.customer.name }" required>
   </div>
    
    <div class="form-group">
     <label for="phone no">Phone No</label>
-    <input type="text" class="form-control form-control-sm" name="number" value="${requestScope.customer.phone}" >
+    <input type="text" class="form-control form-control-sm" name="number" value="${requestScope.customer.phone}" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control form-control-sm" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="${requestScope.customer.email}"/>
+    <input type="email" class="form-control form-control-sm" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="${requestScope.customer.email}" required/>
   </div>
   
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="text" class="form-control form-control-sm" name="password" id="exampleInputPassword1" value="${requestScope.customer.password }">
+    <input type="text" class="form-control form-control-sm" name="password" id="exampleInputPassword1" value="${requestScope.customer.password }" required>
   </div>
   
   <div class="form-group">
     <label for="answer">Security Answer</label>
-    <input type="text" class="form-control form-control-sm" name="answer" value="${requestScope.customer.answer }">
+    <input type="text" class="form-control form-control-sm" name="answer" value="${requestScope.customer.answer }" required>
   </div>
   
   <button type="submit" class="btn btn-primary">Update</button>

@@ -37,7 +37,7 @@
 
   	<div class="form-group">
     	<label for="name">Product Name</label>
-    	<input type="text" class="form-control form-control-sm" name="name" placeholder="Enter product name" value="${product.name}" >
+    	<input type="text" class="form-control form-control-sm" name="name" placeholder="Enter product name" value="${product.name}" required>
   	</div>
   	
   		
@@ -45,19 +45,19 @@
 	<div class="form-row">
   	<div class="form-group col-md-6">
  	    <label for="productPrice">Product Price</label>
- 	  <input type="text" class="form-control" name="price" placeholder="Enter Product Price" value="${product.price }">
+ 	  <input type="text" class="form-control" name="price" placeholder="Enter Product Price" value="${product.price }" required>
 
  	</div>
   	
  	<div class="form-group col-md-6">
  	    <label for="productPrice">Product Quantity</label>
- 	  <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity" value="${product.quantity }">
+ 	  <input type="text" class="form-control" name="quantity" placeholder="Enter Product Quantity" value="${product.quantity }" required>
  	</div>
   	</div>  	
 
   	<div class="form-group">
   		<label for="comment">Product Description</label>
-  		<textarea class="form-control form-control-sm" name="description" rows="1" id="comment">${product.description}</textarea>
+  		<textarea class="form-control form-control-sm" name="description" rows="1" id="comment" required>${product.description}</textarea>
 	</div>
   	
 	<button type="submit" class="btn btn-primary btn-sm">Update</button>

@@ -26,11 +26,11 @@
 		
 		<form action="ForgotPassword" >
 		<div class="form-group">
-			<input type="text" class="form-control" name="email" placeholder="Enter your email address">
+			<input type="text" class="form-control" name="email" placeholder="Enter your email address" required>
 		</div>
 				
 		  		<div class="form-group">
-   					<input type="text" class="form-control" name="answer" placeholder="Enter your nick name">
+   					<input type="text" class="form-control" name="answer" placeholder="Enter your nick name" required>
 			      <small id="emailHelp" class="form-text text-muted">Please enter the same name you entered during signup</small>
   				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
